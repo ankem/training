@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class AverageSalary {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         List<Employee> list = new ArrayList<Employee>();
         list.add(new Employee(1, 2000, "accounting"));
         list.add(new Employee(2, 3000, "manufacturing"));
@@ -19,11 +19,29 @@ public class AverageSalary {
 
 //        list.forEach(employee -> System.out.println(employee.getId()+","+employee.getSalary()+","+employee.getDepartment()));
 
-        list.stream().forEach(e->e.getDepartment());
+        list.stream().forEach(e -> e.getDepartment());
 
-        OptionalDouble average = list.stream().filter(e->e.getDepartment()=="manufacturing").mapToInt(e->e.getSalary()).average();
+        OptionalDouble average = list.stream().filter(e -> e.getDepartment() == "manufacturing").mapToInt(e -> e.getSalary()).average();
 
 //        String average = list.stream().mapToInt(e->e.getSalary()).average().toString();
-        System.out.print(average);
+//        System.out.print(average);
+        List<String> departemnts = list.stream().map(e -> e.getDepartment()).distinct().collect(Collectors.toList());
+        departemnts.forEach(dep -> {
+                    List<Integer> salaries = list.stream()
+                            .filter(e -> e.getDepartment().equals(dep))
+                            .map(e -> e.getSalary())
+                            .collect(Collectors.toList());
+
+                    int[] salariesAsInt = new int[salaries.size()];
+                    for (int i = 0; i < salaries.size(); i++) {
+                        salariesAsInt[i] = salaries.get(i);
+                    }
+                    OptionalDouble avg = IntStream.of(salariesAsInt).average();
+
+                    System.out.println("dep = " + dep);
+                    System.out.println("avg = " + avg);
+                    ;
+                }
+        );
     }
 }

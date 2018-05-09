@@ -13,7 +13,9 @@ public class StudentIndividualAverages {
         averages.forEach(System.out::println);
 
         System.out.println("average if 1st element"+IntStream.of(array[1]).average());
-//        Arrays.stream(array).flatMapToInt(x -> Arrays.stream(x)).average();
+
+        OptionalDouble y = Arrays.stream(array).flatMapToInt(x -> Arrays.stream(x)).average();
+        System.out.println("y = " + y);
 //        Arrays.stream(array).flatMapToInt(x -> Arrays.stream(x)).forEach(System.out::println);
 
 
