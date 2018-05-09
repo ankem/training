@@ -19,6 +19,8 @@ public class AverageSalary {
 
 //        list.forEach(employee -> System.out.println(employee.getId()+","+employee.getSalary()+","+employee.getDepartment()));
 
+        list.stream().forEach(e->e.getDepartment());
+
         OptionalDouble average = list.stream().filter(e->e.getDepartment()=="manufacturing").mapToInt(e->e.getSalary()).average();
 
 //        String average = list.stream().mapToInt(e->e.getSalary()).average().toString();
