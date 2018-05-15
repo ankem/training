@@ -1,12 +1,8 @@
 
-[Recursively print all the files in a direction and their child directories.](https://github.com/ankem/training/blob/testsankeerth/sankeerth/filesExcercise/src/main/java/PrintingFiles.java)
+[Write a java program to create a table called Employee with following columns - firstname, lastname, age, gender, salary, department. EmployeeID should be generated automatically with increasing order.
+Create a CRUD on employee table.
+Get the highest salaried employee from each department with a single query.](https://github.com/ankem/training/blob/jdbcexercises/sankeerth/JDBCExercises/src/main/java/EmployeeTable.java)
 
-[Read a text file and put its contents in reverse order in a different file. Reversing the new file should create original file.](https://github.com/ankem/training/blob/testsankeerth/sankeerth/filesExcercise/src/main/java/ReverseFileContents.java)
-
-[Take an input and print the triangle in a file. if the input is 3, then the following should be printed to the file.
-  *
- * *
-* * *](https://github.com/ankem/training/blob/testsankeerth/sankeerth/filesExcercise/src/main/java/Triangle.java)
-
-[Serialize the list of employee object with firstname, lastname, age, salary, gender. Avoid saving gender while serializing, deserialize them to object again.](https://github.com/ankem/training/blob/testsankeerth/sankeerth/filesExcercise/src/main/java/SerializeEmployee.java)
-
+[Create a one-many relation Employee -> Book. Assume table Book is having the name and author as columns.
+CRUD on Employee books
+List Employee in the ascending order of the number of books read.](https://github.com/ankem/training/blob/jdbcexercises/sankeerth/JDBCExercises/src/main/java/BooksTable.java)
