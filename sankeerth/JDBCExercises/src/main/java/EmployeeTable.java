@@ -1,14 +1,17 @@
+import sun.dc.pr.PRError;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeTable {
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String url = "jdbc:mysql://localhost:3306/myDatabase";
-    static final String USER = "root";
-    static final String PASS = "sankeerth85";
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String url = "jdbc:mysql://localhost:3306/myDatabase";
+    private static final String USER = "root";
+    private static final String PASS = "sankeerth85";
 
-
-    public static void createNewTable() throws ClassNotFoundException {
+    public static void createNewTable() {
 
         String sql = "CREATE TABLE IF NOT EXISTS Employees " +
                 "(id INTEGER NOT NULL AUTO_INCREMENT , " +
@@ -21,57 +24,53 @@ public class EmployeeTable {
                 "PRIMARY KEY(id))";
 
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.prepareStatement(sql)) {
+             PreparedStatement s = conn.prepareStatement(sql)) {
             s.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
-    public static void insertRecord() throws ClassNotFoundException {
+    public static void insertRecord() {
 
         String sql = "INSERT INTO Employees(firstname,lastname,age,gender,salary,department) " +
                 "VALUES ('Lakshma','Kollu',23,'F','45','Accounting')";
 
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.createStatement()) {
-            s.execute(sql);
+             PreparedStatement s = conn.prepareStatement(sql)) {
+            s.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
     public static void updateRecord(int i) {
         String sql = "UPDATE Employees set firstname='sankeerth' where id=" + i;
 
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.createStatement()) {
-            s.execute(sql);
+             PreparedStatement s = conn.prepareStatement(sql)) {
+            s.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
     public static void deleteRecord() {
         Scanner input = new Scanner(System.in);
         System.out.println("enter employee id to delete");
         int n = input.nextInt();
         String sql = "delete from Employees where id=" + n;
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.createStatement()) {
-            s.execute(sql);
+             PreparedStatement s = conn.prepareStatement(sql)) {
+            s.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
     public static void readRecords() {
 
         String sql = "SELECT * from Employees ";
 
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.createStatement()) {
-            ResultSet rs = s.executeQuery(sql);
+             PreparedStatement s = conn.prepareStatement(sql)) {
+            ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 System.out.print("ID :" + rs.getInt(1));
                 System.out.print(", firstname :" + rs.getString(2));
@@ -87,13 +86,12 @@ public class EmployeeTable {
         }
 
     }
-
     public static void highestsalaried() {
         String sql = "SELECT id, firstname, department, MAX(salary) FROM Employees GROUP BY department ";
 
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.createStatement()) {
-            ResultSet rs = s.executeQuery(sql);
+             PreparedStatement s = conn.prepareStatement(sql)) {
+            ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 System.out.print(" id:" + rs.getString(1));
                 System.out.print(", firstname:" + rs.getString(2));
@@ -106,7 +104,6 @@ public class EmployeeTable {
             System.out.println(e.getMessage());
         }
     }
-
     public static void numberOfBooksRead() {
 
         String sql = "select employees.firstname, books.employeeid, count(books.bookname) " +
@@ -115,8 +112,8 @@ public class EmployeeTable {
                 "group by employeeid " +
                 "order by count(books.employeeid)";
         try (Connection conn = DriverManager.getConnection(url, USER, PASS);
-             Statement s = conn.createStatement()) {
-            ResultSet rs = s.executeQuery(sql);
+             PreparedStatement s = conn.prepareStatement(sql)) {
+            ResultSet rs = s.executeQuery();
             while (rs.next()) {
                 System.out.print("First Name :" + rs.getString(1));
                 System.out.print(", ID :" + rs.getInt(2));
@@ -129,7 +126,6 @@ public class EmployeeTable {
         }
 
     }
-
     public static int[] runBatchOperation() {
         String insertSQL = "INSERT INTO Employees(id,firstname,lastname,age,gender,salary,department) " +
                 "VALUES (?,?,?,?,?,?,?)";
@@ -171,6 +167,6 @@ public class EmployeeTable {
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        System.out.println(runBatchOperation()+" records are inserted");
+//        updateRecord();
     }
 }
