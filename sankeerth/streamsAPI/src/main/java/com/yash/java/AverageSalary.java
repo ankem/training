@@ -1,5 +1,8 @@
 package com.yash.java;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -43,5 +46,18 @@ public class AverageSalary {
                     ;
                 }
         );
+
     }
+}
+
+class A extends B{
+    public Integer abc()throws IOException {
+        return 2;
+    }
+}
+class B {
+ public Object abc() throws Exception{
+     System.out.println();
+     return "1";
+ }
 }
